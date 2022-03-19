@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "libsmb",
+        "repositoryURL": "https://github.com/alexiscn/libsmb",
+        "state": {
+          "branch": "main",
+          "revision": "0837ade55dd1a1b0848de30a8ed0cfb4c3c7ac9f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
