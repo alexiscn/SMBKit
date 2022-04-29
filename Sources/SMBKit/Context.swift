@@ -18,8 +18,11 @@ final class SMB2Context: CustomDebugStringConvertible, CustomReflectable {
     private var _context_lock = NSRecursiveLock()
     var timeout: TimeInterval
     
-    init(timeout: TimeInterval) throws {
+    init(timeout: TimeInterval, version: smb2_negotiate_version? = nil) throws {
         let _context = try smb2_init_context().unwrap()
+        if let version = version {
+            smb2_set_version(_context, version)
+        }
         self.context = _context
         self.timeout = timeout
     }
@@ -431,7 +434,7 @@ extension SMB2Context {
     typealias Security = smb2_sec
 }
 
-extension smb2_negotiate_version {
+public extension smb2_negotiate_version {
     static let any = SMB2_VERSION_ANY
     static let v2 = SMB2_VERSION_ANY2
     static let v3 = SMB2_VERSION_ANY3

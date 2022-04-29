@@ -19,6 +19,7 @@ public class AMSMB2: NSObject, NSSecureCoding, Codable, NSCopying, CustomReflect
     fileprivate typealias CopyProgressHandler = ((_ bytes: Int64, _ soFar: Int64, _ total: Int64) -> Bool)?
     
     fileprivate var context: SMB2Context?
+    public var version: smb2_negotiate_version?
     
     public let url: URL
     fileprivate let _domain: String
@@ -748,7 +749,7 @@ extension AMSMB2 {
     }
     
     fileprivate func connnect(shareName: String, encrypted: Bool) throws -> SMB2Context {
-        let context = try SMB2Context(timeout: _timeout)
+        let context = try SMB2Context(timeout: _timeout, version: version)
         self.context = context
         initContext(context, encrypted: encrypted)
         let server = url.host! + (url.port.map { ":\($0)" } ?? "")
